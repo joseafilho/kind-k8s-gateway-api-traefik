@@ -1,0 +1,20 @@
+Criar um cluster kind seguindo os seguintes requisitos:
+
+- 1 Control plane e 2 Worker nodes.
+- CNI default do kind.
+- Criar acesso externo via gateway api com dns seguindo o padrao *.greencap.
+-- Utilize o traefik.
+- Compatibilidade com http e https nas portas 30001 e 30002.
+- Instalar kubernetes dashboard via helm, ele só funciona na porta https.
+-- Url a ser utilizada: https://kube-dash.greencap:30002.
+- Instalar harbor via helm.
+-- validar funcionamento da console web.
+-- validar funcionamento do docker login, docker push e docker pull nessa instalacao do harbor.
+- 1 aplicação de teste para validar comunicação externa do cluster.
+-- Criar um novo namespace chamado web-app.
+-- Url a ser utilizada: http://web-app.greencap:30001.
+- Siga as rules.
+- Nao crie arquivos *.md desnecessarios com um monte de explicação.
+- Não crie arquivos sh de testes desnecessarios.
+- Importante, a solução tem que ser reaproveitavel.
+- Não utilizar waits muito demorados.

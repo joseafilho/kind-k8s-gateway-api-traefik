@@ -1,0 +1,27 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: greencap-gateway
+  namespace: default
+spec:
+  gatewayClassName: traefik
+  listeners:
+  - name: web
+    port: 8000
+    protocol: HTTP
+    hostname: "*.greencap"
+    allowedRoutes:
+      namespaces:
+        from: All
+  - name: websecure
+    port: 8443
+    protocol: HTTPS
+    hostname: "*.greencap"
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        name: greencap-tls
+    allowedRoutes:
+      namespaces:
+        from: All

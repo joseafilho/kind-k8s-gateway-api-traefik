@@ -1,0 +1,41 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: web-app-route
+  namespace: web-app
+spec:
+  parentRefs:
+  - name: greencap-gateway
+    namespace: default
+    sectionName: web
+  hostnames:
+  - "web-app.greencap"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: web-app
+      port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: kube-dash-route
+  namespace: kubernetes-dashboard
+spec:
+  parentRefs:
+  - name: greencap-gateway
+    namespace: default
+    sectionName: websecure
+  hostnames:
+  - "kube-dash.greencap"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: kubernetes-dashboard-kong-proxy
+      port: 443
